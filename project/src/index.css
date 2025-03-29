@@ -82,6 +82,16 @@
                 inset 0 0 10px rgba(255, 255, 255, 0.2);
   }
 
+  .arcade-button-sm {
+    @apply px-4 py-2 font-['Press_Start_2P'] text-xs relative overflow-hidden
+           transition-all duration-300 transform hover:scale-105 active:scale-95
+           rounded-lg flex items-center;
+    background: linear-gradient(45deg, #7B1FA2, #20C997);
+    box-shadow: 0 0 10px rgba(123, 31, 162, 0.3),
+                0 0 20px rgba(32, 201, 151, 0.2),
+                inset 0 0 5px rgba(255, 255, 255, 0.1);
+  }
+
   .arcade-button::before {
     content: '';
     @apply absolute inset-0 opacity-30;
@@ -124,6 +134,22 @@
 
   .scroll-text {
     animation: scroll 20s linear infinite;
+  }
+
+  .nav-link {
+    @apply flex items-center text-sm font-press-start text-gray-300 
+           hover:text-emerald-400 transition-colors duration-300 relative;
+  }
+
+  .nav-link-underline {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 
+           transition-all duration-300 opacity-0 group-hover:w-full group-hover:opacity-100;
+  }
+
+  .mobile-nav-link {
+    @apply flex items-center text-sm font-press-start text-gray-300 
+           hover:text-emerald-400 transition-colors duration-300
+           px-4 py-3 w-full hover:bg-white/5;
   }
 
   @keyframes scroll {
