@@ -1,8 +1,10 @@
 const express = require("express");
 const UserModel = require("../models/userModel");
+const debateModel = require("../models/debateModel");
 const expressAsyncHandler = require("express-async-handler");
 const generateToken = require("../config/generateTokens");
 const bcrypt = require("bcryptjs");
+const authMiddleware = require("../middlewares/authMiddleware");
 const loginController = expressAsyncHandler(async (req, res) => {
   const { name, password } = req.body;
 
@@ -78,5 +80,42 @@ const signupController = expressAsyncHandler(async (req, res) => {
 });
 
 module.exports = signupController;
+const profileController = async (req, res) => {
+  try {
+    console.log("User from Middleware:", req.user); // ✅ Confirm middleware data
 
-module.exports = { loginController, signupController };
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: "Unauthorized access" });
+    }
+
+    const user = await UserModel.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const debatesWon = await debateModel.countDocuments({ winner: user._id });
+    const debatesLost = await debateModel.countDocuments({
+      $and: [
+        { $or: [{ participant1: user._id }, { participant2: user._id }] },
+        { winner: { $ne: user._id } },
+      ],
+    });
+
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      debatesWon,
+      debatesLost,
+      token: req.headers.authorization.split(" ")[1],
+    });
+  } catch (error) {
+    console.error("Error in Profile Controller:", error);
+    res.status(401).json({ message: "Invalid token" });
+  }
+};
+
+module.exports = profileController;
+
+module.exports = { loginController, signupController, profileController };
