@@ -18,5 +18,5 @@ const judgementModel = mongoose.Schema({
   createdAt: Date,
   updatedAt: Date,
 });
-const Judgement = mongoose.Model("Judgement", judgementModel);
+const Judgement = mongoose.model("Judgement", judgementModel);
 module.exports = Judgement;

@@ -11,5 +11,5 @@ const debateModel = mongoose.Schema({
   createdAt: Date,
   updatedAt: Date,
 });
-const Debate = mongoose.Model("Debate", debateModel);
+const Debate = mongoose.model("Debate", debateModel);
 module.exports = Debate;

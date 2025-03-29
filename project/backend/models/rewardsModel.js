@@ -9,5 +9,5 @@ const rewardsModel = mongoose.Schema({
   createdAt: Date,
   updatedAt: Date,
 });
-const Rewards = mongoose.Model("Rewards", rewardsModel);
+const Rewards = mongoose.model("Rewards", rewardsModel);
 module.exports = Rewards;
