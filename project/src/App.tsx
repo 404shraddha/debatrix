@@ -1,20 +1,8 @@
-import React, { useState } from "react";
-import {
-  Sword,
-  Brain,
-  Trophy,
-  Users,
-  Timer,
-  Zap,
-  Crown,
-  Star,
-  Menu,
-  X,
-  LogIn,
-} from "lucide-react";
+import React, { useState } from 'react';
+import { Sword, Brain, Trophy, Users, Timer, Zap, Crown, Star, Menu, X, LogIn, Wallet2 } from 'lucide-react';
 
 type LiveUpdate = {
-  type: "win" | "join";
+  type: 'win' | 'join';
   player: string;
   amount?: number;
   topic?: string;
@@ -23,15 +11,11 @@ type LiveUpdate = {
 function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  
   const liveUpdates: LiveUpdate[] = [
-    { type: "win", player: "CryptoKing", amount: 5.5 },
-    {
-      type: "join",
-      player: "LogicMaster",
-      topic: "Should AI have human rights?",
-    },
-    { type: "win", player: "DebateQueen", amount: 2.8 },
+    { type: 'win', player: 'CryptoKing', amount: 5.5 },
+    { type: 'join', player: 'LogicMaster', topic: 'Should AI have human rights?' },
+    { type: 'win', player: 'DebateQueen', amount: 2.8 },
   ];
 
   const handleConnect = () => {
@@ -47,7 +31,7 @@ function App() {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-lg border-b border-white/10">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-end h-16">
+          <div className="flex items-center justify-between h-16">
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               <a href="#" className="nav-link group">
@@ -55,15 +39,24 @@ function App() {
                 <span>Debates</span>
                 <div className="nav-link-underline"></div>
               </a>
+            </div>
+
+            <div className="hidden md:flex items-center">
               <a href="#" className="nav-link group">
                 <Trophy className="w-4 h-4 mr-2" />
                 <span>Leaderboard</span>
                 <div className="nav-link-underline"></div>
               </a>
-              <button onClick={handleConnect} className="arcade-button-sm">
+            </div>
+
+            <div className="hidden md:flex items-center">
+              <button
+                onClick={handleConnect}
+                className="arcade-button-sm"
+              >
                 <span className="flex items-center">
                   <LogIn className="w-4 h-4 mr-2" />
-                  Sign in
+                  Sign In
                 </span>
               </button>
             </div>
@@ -85,7 +78,7 @@ function App() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden ${isMenuOpen ? "block" : "hidden"}`}>
+        <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
           <div className="px-4 pt-2 pb-4 space-y-2 bg-black/50 backdrop-blur-lg">
             <a href="#" className="mobile-nav-link">
               <Sword className="w-4 h-4 mr-2" />
@@ -101,7 +94,7 @@ function App() {
             >
               <span className="flex items-center justify-center">
                 <LogIn className="w-4 h-4 mr-2" />
-                Sign in
+                Sign In
               </span>
             </button>
           </div>
@@ -113,14 +106,14 @@ function App() {
         {/* Hero Section */}
         <header className="relative h-screen flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 bg-gradient-radial from-purple-900/20 via-transparent to-transparent pointer-events-none" />
-
+          
           <div className="container mx-auto px-4 text-center relative z-10">
             <div className="animate-float mb-8">
               <h1 className="arcade-title text-5xl md:text-7xl mb-6">
                 DEBATRIX
               </h1>
               <p className="font-press-start text-sm md:text-base text-emerald-400 mt-4">
-                Step into the Arena. Argue. Stake. Conquer.
+                Step into the Arena. Stake. Argue. Conquer.
               </p>
             </div>
 
@@ -131,27 +124,25 @@ function App() {
                   Join a Debate
                 </span>
               </button>
-
+              
               <button
                 onClick={handleConnect}
                 className="arcade-button w-full md:w-auto"
               >
                 <span className="flex items-center justify-center gap-3">
-                  <LogIn className="w-5 h-5" />
-                  Sign in
+                  <Wallet2 className="w-5 h-5" />
+                  Connect Wallet
                 </span>
               </button>
             </div>
 
             {/* Live Feed */}
             <div className="live-feed h-32 max-w-md mx-auto glass-panel p-4">
-              <h3 className="font-press-start text-xs text-emerald-400 mb-4">
-                LIVE FEED
-              </h3>
+              <h3 className="font-press-start text-xs text-emerald-400 mb-4">LIVE FEED</h3>
               <div className="scroll-text space-y-3">
                 {liveUpdates.map((update, index) => (
                   <div key={index} className="flex items-center gap-2 text-sm">
-                    {update.type === "win" ? (
+                    {update.type === 'win' ? (
                       <>
                         <Trophy className="w-4 h-4 text-yellow-500" />
                         <span className="text-yellow-500">{update.player}</span>
@@ -181,24 +172,9 @@ function App() {
 
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                {
-                  name: "CryptoKing",
-                  wins: 28,
-                  earnings: 155.5,
-                  rank: "Legendary",
-                },
-                {
-                  name: "LogicMaster",
-                  wins: 24,
-                  earnings: 120.8,
-                  rank: "Elite",
-                },
-                {
-                  name: "DebateQueen",
-                  wins: 22,
-                  earnings: 98.2,
-                  rank: "Master",
-                },
+                { name: 'CryptoKing', wins: 28, earnings: 155.5, rank: 'Legendary' },
+                { name: 'LogicMaster', wins: 24, earnings: 120.8, rank: 'Elite' },
+                { name: 'DebateQueen', wins: 22, earnings: 98.2, rank: 'Master' },
               ].map((player, index) => (
                 <div key={index} className="neon-border p-6">
                   <div className="flex items-center gap-4 mb-4">
@@ -208,13 +184,11 @@ function App() {
                       <Star className="w-8 h-8 text-purple-500" />
                     )}
                     <div>
-                      <h3 className="font-press-start text-sm">
-                        {player.name}
-                      </h3>
+                      <h3 className="font-press-start text-sm">{player.name}</h3>
                       <p className="text-xs text-emerald-400">{player.rank}</p>
                     </div>
                   </div>
-
+                  
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Wins:</span>
@@ -222,13 +196,11 @@ function App() {
                     </div>
                     <div className="flex justify-between text-sm">
                       <span>Earnings:</span>
-                      <span className="text-emerald-400">
-                        {player.earnings} SOL
-                      </span>
+                      <span className="text-emerald-400">{player.earnings} SOL</span>
                     </div>
                     <div className="credibility-bar mt-4">
-                      <div
-                        className="credibility-bar-fill"
+                      <div 
+                        className="credibility-bar-fill" 
                         style={{ width: `${(player.wins / 30) * 100}%` }}
                       />
                     </div>
@@ -253,15 +225,15 @@ function App() {
                   stake: 2.5,
                   timeLeft: "05:23",
                   players: 2,
-                  status: "In Progress",
+                  status: "In Progress"
                 },
                 {
                   topic: "Is cryptocurrency the future of global finance?",
                   stake: 3.8,
                   timeLeft: "Waiting",
                   players: 1,
-                  status: "Open",
-                },
+                  status: "Open"
+                }
               ].map((debate, index) => (
                 <div key={index} className="pixel-border">
                   <div className="neon-border p-6">
@@ -279,7 +251,7 @@ function App() {
                         </span>
                       </div>
                     </div>
-
+                    
                     <h3 className="text-lg font-press-start mb-4 leading-relaxed">
                       {debate.topic}
                     </h3>
@@ -288,13 +260,11 @@ function App() {
                       <div className="text-sm font-press-start text-emerald-400">
                         {debate.stake} SOL
                       </div>
-                      <div
-                        className={`px-3 py-1 rounded-full text-sm font-press-start ${
-                          debate.status === "In Progress"
-                            ? "bg-purple-500/20 text-purple-400"
-                            : "bg-emerald-500/20 text-emerald-400"
-                        }`}
-                      >
+                      <div className={`px-3 py-1 rounded-full text-sm font-press-start ${
+                        debate.status === "In Progress" 
+                          ? "bg-purple-500/20 text-purple-400"
+                          : "bg-emerald-500/20 text-emerald-400"
+                      }`}>
                         {debate.status}
                       </div>
                     </div>
